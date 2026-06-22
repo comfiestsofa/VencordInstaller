@@ -11,6 +11,10 @@ Basically, I just wanted to be able to quickly do this after every update lol:
 sudo /Applications/VencordInstaller.app/Contents/MacOS/VencordInstallerCli-macOS -install -install-openasar -location "/Applications/Vencord.app"
 sudo fileicon set "/Applications/Vencord.app" "/Applications/VencordInstaller.app/Contents/Resources/icon.icns"
 ```
+Or as an `alias` one-liner inside `~/.bashrc` so you can just type `vencord` into Terminal:
+```bash
+alias vencord='sudo /Applications/VencordInstaller.app/Contents/MacOS/VencordInstallerCli-macOS -install -install-openasar -location "/Applications/Vencord.app"; sudo fileicon set "/Applications/Vencord.app" "/Applications/VencordInstaller.app/Contents/Resources/icon.icns"'
+```
 
 * For me, `/Applications/Vencord.app` is a copy of `Discord.app` but renamed.
 * `fileicon` is this: https://github.com/mklement0/fileicon (you can do `brew install fileicon` or [install it manually](https://github.com/mklement0/fileicon#manual-installation))

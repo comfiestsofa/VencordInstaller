@@ -16,15 +16,15 @@ export RELEASE_TAG="$(git describe --always --tags)"
 
 # macOS GUI and CLI amd64 (Intel)
 mkdir -p build/macos-amd64
-CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -buildvcs=false -v -tags static -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${RELEASE_TAG}'" -o build/macos-amd64/VencordInstaller
-CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -buildvcs=false -v -tags "static cli" -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${RELEASE_TAG}'" -o build/macos-amd64/VencordInstallerCli-macOS
+MACOSX_DEPLOYMENT_TARGET=10.8 CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -buildvcs=false -v -tags static -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${RELEASE_TAG}'" -o build/macos-amd64/VencordInstaller
+MACOSX_DEPLOYMENT_TARGET=10.8 CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -buildvcs=false -v -tags "static cli" -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${RELEASE_TAG}'" -o build/macos-amd64/VencordInstallerCli-macOS
 chmod +x build/macos-amd64/VencordInstaller
 chmod +x build/macos-amd64/VencordInstallerCli-macOS
 
 # macOS GUI and CLI arm64 (Apple silicon)
 mkdir -p build/macos-arm64
-CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -buildvcs=false -v -tags static -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${RELEASE_TAG}'" -o build/macos-arm64/VencordInstaller
-CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -buildvcs=false -v -tags "static cli" -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${RELEASE_TAG}'" -o build/macos-arm64/VencordInstallerCli-macOS
+MACOSX_DEPLOYMENT_TARGET=11.0 CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -buildvcs=false -v -tags static -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${RELEASE_TAG}'" -o build/macos-arm64/VencordInstaller
+MACOSX_DEPLOYMENT_TARGET=11.0 CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -buildvcs=false -v -tags "static cli" -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${RELEASE_TAG}'" -o build/macos-arm64/VencordInstallerCli-macOS
 chmod +x build/macos-arm64/VencordInstaller
 chmod +x build/macos-arm64/VencordInstallerCli-macOS
 

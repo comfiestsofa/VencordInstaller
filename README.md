@@ -9,7 +9,11 @@ So this fork exists which merges [pull request #176](https://github.com/Vencord/
 ## Building from source (on macOS)
 Install [Homebrew](https://brew.sh/), then run in Terminal:
 ```bash
-./make-build-macos-gui-cli-from-macos.sh
+./make-build-all-from-macos.sh
+```
+Or if you want the specific versions:
+```
+./make-build-macos-cli-gui-from-macos.sh
 ./make-build-windows-cli-from-macos.sh
 ./make-build-linux-cli-from-macos.sh
 ```

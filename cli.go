@@ -66,6 +66,8 @@ func main() {
 		fmt.Println("Vencord Installer Cli", buildinfo.InstallerTag, "("+buildinfo.InstallerGitHash+")")
 		fmt.Println("Copyright (C) 2023 Vendicated and Vencord contributors")
 		fmt.Println("License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.")
+		fmt.Println("Unofficial fork by sofa (comfiestsofa): https://github.com/comfiestsofa/VencordInstaller")
+		fmt.Println("Please do not bother official Vencord developers with any issues in this fork!")
 		return
 	}
 

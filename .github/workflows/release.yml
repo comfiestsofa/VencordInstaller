@@ -87,18 +87,24 @@ jobs:
       - name: Install Go dependencies
         run: go get -v
 
-      - name: Build
+      - name: Build Gui
         run: CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -buildvcs=false -v -tags static -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${{ env.RELEASE_TAG }}'" -o VencordInstaller
+
+      - name: Build Cli
+        run: CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -buildvcs=false -v -tags "static cli" -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${{ env.RELEASE_TAG }}'" -o VencordInstallerCli-macOS
 
       - name: Update executable
         run: |
           chmod +x VencordInstaller
+          chmod +x VencordInstallerCli-macOS
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: VencordInstaller-macos-amd64-bin
-          path: VencordInstaller
+          path: |
+            VencordInstaller
+            VencordInstallerCli-macOS
 
   build-mac-arm64:
     runs-on: macos-26
@@ -133,18 +139,24 @@ jobs:
       - name: Install Go dependencies
         run: go get -v
 
-      - name: Build
+      - name: Build Gui
         run: CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -buildvcs=false -v -tags static -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${{ env.RELEASE_TAG }}'" -o VencordInstaller
+
+      - name: Build Cli
+        run: CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -buildvcs=false -v -tags "static cli" -ldflags "-s -w -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${{ env.RELEASE_TAG }}'" -o VencordInstallerCli-macOS
 
       - name: Update executable
         run: |
           chmod +x VencordInstaller
+          chmod +x VencordInstallerCli-macOS
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: VencordInstaller-macos-arm64-bin
-          path: VencordInstaller
+          path: |
+            VencordInstaller
+            VencordInstallerCli-macOS
 
   build-mac-universal:
     runs-on: macos-14
@@ -173,6 +185,13 @@ jobs:
             macos-arm64/VencordInstaller \
             -output VencordInstaller
           chmod +x VencordInstaller
+          chmod +x macos-amd64/VencordInstallerCli-macOS
+          chmod +x macos-arm64/VencordInstallerCli-macOS
+          lipo -create \
+            macos-amd64/VencordInstallerCli-macOS \
+            macos-arm64/VencordInstallerCli-macOS \
+            -output VencordInstallerCli-macOS
+          chmod +x VencordInstallerCli-macOS
 
       - name: Generate MacOS bundle
         run: |
@@ -180,14 +199,17 @@ jobs:
           mkdir -p VencordInstaller.app/Contents/Resources
           cp macos/Info.plist VencordInstaller.app/Contents/Info.plist
           mv VencordInstaller VencordInstaller.app/Contents/MacOS/VencordInstaller
+          cp VencordInstallerCli-macOS VencordInstaller.app/Contents/MacOS/VencordInstallerCli-macOS
           cp macos/icon.icns VencordInstaller.app/Contents/Resources/icon.icns
-          zip -r VencordInstaller.MacOS.zip VencordInstaller.app
+          zip -r VencordInstaller.MacOS.zip VencordInstaller.app VencordInstallerCli-macOS
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: VencordInstaller-macos
-          path: VencordInstaller.MacOS.zip
+          path: |
+            VencordInstaller.MacOS.zip
+            VencordInstallerCli-macOS
 
   build-windows:
     runs-on: windows-latest
@@ -300,4 +322,6 @@ jobs:
           files: |
             linux/VencordInstallerCli-linux
             macos/VencordInstaller.MacOS.zip
-            windows/VencordInstalle*.exe
+            macos/VencordInstallerCli-macOS
+            windows/VencordInstaller.exe
+            windows/VencordInstallerCli.exe

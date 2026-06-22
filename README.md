@@ -6,15 +6,30 @@ I got tired of waiting and wanted a macOS CLI version so I could script/automate
 
 So I made this fork which merges [pull request #176](https://github.com/Vencord/Installer/pull/176), and adds macOS CLI build support, sort of based off of [pull request #168](https://github.com/Vencord/Installer/pull/168) but adjusted to work with the Universal arm64/x64 format.
 
+Basically, I just wanted to be able to quickly do this after every update lol:
+```bash
+sudo /Applications/VencordInstaller.app/Contents/MacOS/VencordInstallerCli-macOS -install -install-openasar -location "/Applications/Vencord.app"
+sudo fileicon set "/Applications/Vencord.app" "/Applications/VencordInstaller/Contents/Resources/icon.icns"
+```
+
+* For me, `/Applications/Vencord.app` is a copy of `Discord.app` but renamed.
+* `fileicon` is this: https://github.com/mklement0/fileicon (you can do `brew install fileicon` or [install it manually](https://github.com/mklement0/fileicon#manual-installation))
+* `sudo` is used so I don't have to `sudo chown -R "$(whoami):staff" "/Applications/Vencord.app"` beforehand, since I assume Discord has *some* reason for wanting the app to be `root:wheel`?
+
+## Changes
+* macOS builds are now Universal (Intel + Apple silicon).
+* macOS CLI build is available, making it easy to automate in a script after Discord updates.
+* Windows CLI build is now available in 64-bit.
+
 ## Getting the builds
 Look in [Releases](https://github.com/comfiestsofa/VencordInstaller/releases).
 
 Included builds:
-* macOS Universal (Intel, Apple silicon) GUI (`VencordInstaller.app` inside `VencordInstaller.MacOS.zip`)
-* macOS Universal (Intel, Apple silicon) CLI (`VencordInstallerCli-macOS`)
-* Windows 64-bit GUI (`VencordInstaller.exe`)
+* macOS Universal (Intel + Apple silicon) CLI (`VencordInstallerCli-macOS`)
+* macOS Universal (Intel + Apple silicon) GUI (`VencordInstaller.app` inside `VencordInstaller.MacOS.zip`)
 * Windows 64-bit CLI (`VencordInstallerCli64.exe`)
 * Windows 32-bit CLI (`VencordInstallerCli.exe`)
+* Windows 64-bit GUI (`VencordInstaller.exe`)
 * Linux 64-bit CLI (`VencordInstallerCli-linux`)
 
 Or you can run this in Terminal. Works on macOS, Windows (Git Bash, MSYS2), Linux.

@@ -1,3 +1,32 @@
+# Vencord Installer (Unofficial fork with macOS CLI support)
+
+The Vencord Installer repo has been rejecting every pull request made in the past year because they're working on a Rust rewrite instead.
+
+I got tired of waiting and wanted a macOS CLI version so I could script/automate patching my Discord app on macOS since it becomes unpatched every time Discord updates the actual app and not the web part. (You can tell when this is about to happen if a Discord update prompts you to enter your macOS password.)
+
+So this fork exists which merges [pull request #176](https://github.com/Vencord/Installer/pull/176), and adds macOS CLI build support, sort of based off of [pull request #168](https://github.com/Vencord/Installer/pull/168) but adjusted to work with the Universal arm64/x64 format.
+
+## Building from source (on macOS)
+Install [Homebrew](https://brew.sh/), then run in Terminal:
+```bash
+./make-build-macos-gui-cli-from-macos.sh
+./make-build-windows-cli-from-macos.sh
+./make-build-linux-cli-from-macos.sh
+```
+
+Or use the builds in Releases (macOS GUI/CLI, Windows CLI, Linux CLI).
+
+I don't have Windows GUI or Linux X11/Wayland GUI builds because I'm too dumb to figure out how to make those work when building from macOS, and I also don't know how to set up GitHub Actions. The only changes I made here don't affect those versions anyway.
+
+Use [the official Vencord Installer builds](https://github.com/Vencord/Installer/releases) if you want Windows GUI or Linux X11/Wayland GUI builds.
+
+## Disclaimer
+**This is an unofficial fork. Please do not bother Vencord developers about any issues in this fork.**
+
+The original README is attached below this line. Please note that the build instructions seem to be a little outdated/incomplete, I recommend reading [.github/workflows/release.yml](.github/workflows/release.yml) instead.
+
+---
+
 # Vencord Installer
 
 The Vencord Installer allows you to install [Vencord, the cutest Discord Desktop client mod](https://github.com/Vendicated/Vencord)

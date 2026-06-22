@@ -9,7 +9,7 @@ So I made this fork which merges [pull request #176](https://github.com/Vencord/
 Basically, I just wanted to be able to quickly do this after every update lol:
 ```bash
 sudo /Applications/VencordInstaller.app/Contents/MacOS/VencordInstallerCli-macOS -install -install-openasar -location "/Applications/Vencord.app"
-sudo fileicon set "/Applications/Vencord.app" "/Applications/VencordInstaller/Contents/Resources/icon.icns"
+sudo fileicon set "/Applications/Vencord.app" "/Applications/VencordInstaller.app/Contents/Resources/icon.icns"
 ```
 
 * For me, `/Applications/Vencord.app` is a copy of `Discord.app` but renamed.

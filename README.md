@@ -2,27 +2,48 @@
 
 The Vencord Installer repo has been rejecting every pull request made in the past year because they're working on a Rust rewrite instead.
 
-I got tired of waiting and wanted a macOS CLI version so I could script/automate patching my Discord app on macOS since it becomes unpatched every time Discord updates the actual app and not the web part. (You can tell when this is about to happen if a Discord update prompts you to enter your macOS password.)
+I got tired of waiting and wanted a macOS CLI version so I could script/automate patching my Discord app on macOS, since it gets unpatched every time Discord updates the actual app and not the web part. (You can tell when this is about to happen if a Discord update prompts you to enter your macOS password.)
 
-So this fork exists which merges [pull request #176](https://github.com/Vencord/Installer/pull/176), and adds macOS CLI build support, sort of based off of [pull request #168](https://github.com/Vencord/Installer/pull/168) but adjusted to work with the Universal arm64/x64 format.
+So I made this fork which merges [pull request #176](https://github.com/Vencord/Installer/pull/176), and adds macOS CLI build support, sort of based off of [pull request #168](https://github.com/Vencord/Installer/pull/168) but adjusted to work with the Universal arm64/x64 format.
 
-## Building from source (on macOS)
+## Getting the builds
+Look in [Releases](https://github.com/comfiestsofa/VencordInstaller/releases).
+
+Included builds:
+* macOS Universal (Intel, Apple silicon) GUI (`VencordInstaller.app` inside `VencordInstaller.MacOS.zip`)
+* macOS Universal (Intel, Apple silicon) CLI (`VencordInstallerCli-macOS`)
+* Windows 64-bit GUI (`VencordInstaller.exe`)
+* Windows 64-bit CLI (`VencordInstallerCli64.exe`)
+* Windows 32-bit CLI (`VencordInstallerCli.exe`)
+* Linux 64-bit CLI (`VencordInstallerCli-linux`)
+
+Or you can run this in Terminal. Works on macOS, Windows (Git Bash, MSYS2), Linux.
+```bash
+/bin/bash -c "$(curl -fsSL https://github.com/comfiestsofa/VencordInstaller/raw/refs/heads/sofa/install.sh)"
+```
+
+There's also a PowerShell version for Windows.
+```ps1
+& ([scriptblock]::Create((irm "https://github.com/comfiestsofa/VencordInstaller/raw/refs/heads/sofa/install.ps1")))
+```
+If you are on an older version of Windows, you may need to run this PowerShell command first:
+```ps1
+[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12
+```
+
+## Building from source on macOS
 Install [Homebrew](https://brew.sh/), then run in Terminal:
 ```bash
 ./make-build-all-from-macos.sh
 ```
-Or if you want the specific versions:
+Or if you want to build only a specific version:
 ```
 ./make-build-macos-cli-gui-from-macos.sh
 ./make-build-windows-cli-from-macos.sh
 ./make-build-linux-cli-from-macos.sh
 ```
 
-Or use the builds in Releases (macOS GUI/CLI, Windows CLI, Linux CLI).
-
-I don't have Windows GUI or Linux X11/Wayland GUI builds because I'm too dumb to figure out how to make those work when building from macOS, and I also don't know how to set up GitHub Actions. The only changes I made here don't affect those versions anyway.
-
-Use [the official Vencord Installer builds](https://github.com/Vencord/Installer/releases) if you want Windows GUI or Linux X11/Wayland GUI builds.
+I'm too dumb to figure out how to build Windows GUI or Linux X11/Wayland GUI from macOS, sorry. Just use the GitHub Actions builds [in the Releases](https://github.com/comfiestsofa/VencordInstaller/releases).
 
 ## Disclaimer
 **This is an unofficial fork. Please do not bother Vencord developers about any issues in this fork.**

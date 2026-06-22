@@ -1,5 +1,8 @@
 # Based partially on Alyxia's work, thanks so much!
 
+permissions:
+  contents: write
+
 name: Release
 on:
   workflow_dispatch:

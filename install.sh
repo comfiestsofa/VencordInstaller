@@ -24,8 +24,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     --location \
     --fail
 
+  chmod +x "$outfile"
+
   echo "Running with sudo, please enter your macOS user login password so Vencord will have permission to patch Discord (it will not show up, this is normal)"
-  sudo "$outfile"
+  sudo env "$@" "$outfile"
 elif [[ "$OSTYPE" == "cygwin" ]] || [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
   # https://stackoverflow.com/a/8597411
   curl -sS https://github.com/comfiestsofa/VencordInstaller/releases/latest/download/VencordInstallerCli.exe \

@@ -258,6 +258,13 @@ jobs:
           go-winres make --product-version "git-tag"
           CGO_ENABLED=1 GOOS=windows GOARCH=amd64 go build -buildvcs=false -v -tags static -ldflags "-s -w -H=windowsgui -extldflags=-static -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${{ env.RELEASE_TAG }}'" -o VencordInstaller.exe
 
+      - name: Build amd64 Cli
+        shell: msys2 {0}
+        run: |
+          export GOROOT=/mingw64/lib/go
+          export GOPATH=/mingw64
+          CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -buildvcs=false -v -tags "static cli" -ldflags "-s -w -extldflags=-static -X 'vencordinstaller/buildinfo.InstallerGitHash=$(git rev-parse --short HEAD)' -X 'vencordinstaller/buildinfo.InstallerTag=${{ env.RELEASE_TAG }}'" -o VencordInstallerCli64.exe
+
       - name: Build i386 Cli
         shell: msys2 {0}
         run: |

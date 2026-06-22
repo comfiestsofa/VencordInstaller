@@ -3,7 +3,7 @@
 
 # Delete old build folder
 if [ -d "build" ]; then
-	rm -rf "build"
+	rm -rf "build/macos-"*
 fi
 
 # Install Go and dependencies
@@ -51,7 +51,7 @@ mv build/macos-universal/VencordInstaller build/macos-universal/VencordInstaller
 cp build/macos-universal/VencordInstallerCli-macOS build/macos-universal/VencordInstaller.app/Contents/MacOS/VencordInstallerCli-macOS
 cp macos/icon.icns build/macos-universal/VencordInstaller.app/Contents/Resources/icon.icns
 
-# Package everything up
+# Package macOS stuff up
 cd build/macos-universal
 zip -r VencordInstaller.MacOS.zip VencordInstaller.app VencordInstallerCli-macOS
 
